@@ -9,13 +9,38 @@
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 
-import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildDossier } from './vendor/makefun-game.ts';
 
 const here = fileURLToPath(new URL('.', import.meta.url));
 const out = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
+
+// Pre-flight check: every file this program is about to copy must exist before
+// any copying starts, so a missing input fails fast with the path named instead
+// of producing a half-built output.
+function listFiles(dir: string): string[] {
+  const found: string[] = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) found.push(...listFiles(path));
+    else found.push(path);
+  }
+  return found;
+}
+
+function requireExists(path: string): void {
+  if (!existsSync(path)) throw new Error(`missing required input: ${path}`);
+}
+
+const gameDir = join(here, 'game');
+const screenshotsDir = join(here, 'screenshots');
+const vendorFile = join(here, 'vendor', 'makefun-game.ts');
+requireExists(gameDir);
+requireExists(vendorFile);
+for (const file of listFiles(gameDir)) requireExists(file);
+if (existsSync(screenshotsDir)) for (const file of listFiles(screenshotsDir)) requireExists(file);
 
 mkdirSync(out, { recursive: true });
 cpSync(join(here, 'game'), join(out, 'game'), { recursive: true });
