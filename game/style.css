@@ -1,0 +1,156 @@
+/* style.css — layout and HUD for Spot the Difference. One job: look. */
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #141824;
+  color: #f2ede0;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 14px 18px 20px;
+}
+
+#hud {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  padding: 6px 4px 14px;
+  border-bottom: 2px solid #2c3350;
+}
+
+.hud-title h1 {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 0.5px;
+  color: #ffd23f;
+}
+
+.hud-title p {
+  margin: 2px 0 0;
+  font-size: 15px;
+  font-style: italic;
+  color: #b9c0d8;
+}
+
+.hud-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 64px;
+}
+
+.hud-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #8d94ad;
+}
+
+.hud-stat span:last-child {
+  font-size: 24px;
+  font-weight: bold;
+  font-variant-numeric: tabular-nums;
+}
+
+#timer.low { color: #ff5a4e; }
+
+button {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: bold;
+  color: #141824;
+  background: #ffd23f;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+button:hover { background: #ffe08a; }
+button:disabled { background: #5a6076; color: #aab0c4; cursor: default; }
+
+#mute-btn { background: #2c3350; color: #f2ede0; }
+#mute-btn:hover { background: #3a4266; }
+
+#panels {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  padding-top: 14px;
+}
+
+.panel { margin: 0; }
+
+.panel figcaption {
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #b9c0d8;
+  margin-bottom: 6px;
+}
+
+.panel canvas {
+  display: block;
+  width: 600px;
+  height: 380px;
+  border: 3px solid #2c3350;
+  border-radius: 10px;
+  background: #222;
+  cursor: crosshair;
+}
+
+#message {
+  text-align: center;
+  font-size: 16px;
+  color: #d8cfae;
+  min-height: 24px;
+  margin: 12px 0 0;
+}
+
+#overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 12, 22, 0.78);
+  z-index: 10;
+}
+
+#overlay.hidden { display: none; }
+
+#overlay-card {
+  background: #1e2438;
+  border: 2px solid #ffd23f;
+  border-radius: 14px;
+  padding: 28px 36px;
+  max-width: 560px;
+  text-align: center;
+}
+
+#overlay-card h2 {
+  margin: 0 0 10px;
+  font-size: 30px;
+  color: #ffd23f;
+}
+
+#overlay-card p {
+  font-size: 17px;
+  line-height: 1.5;
+  color: #e8e2cf;
+}
+
+#overlay-score {
+  font-size: 20px;
+  font-weight: bold;
+  color: #7fd4ff;
+}
+
+#overlay-btn { margin-top: 8px; font-size: 17px; padding: 12px 26px; }

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spot the Difference — Harbour, Market &amp; Forest</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main id="app">
+  <header id="hud">
+    <div class="hud-title">
+      <h1>Spot the Difference</h1>
+      <p id="level-name">Harbour at Dawn</p>
+    </div>
+    <div class="hud-stat"><span class="hud-label">Found</span><span id="found-count">0 / 7</span></div>
+    <div class="hud-stat"><span class="hud-label">Time</span><span id="timer">2:30</span></div>
+    <div class="hud-stat"><span class="hud-label">Score</span><span id="score">0</span></div>
+    <div class="hud-stat"><span class="hud-label">Hints</span><span id="hints-left">3</span></div>
+    <button id="hint-btn" type="button">Hint (H)</button>
+    <button id="mute-btn" type="button" aria-label="Toggle sound">Sound: on</button>
+  </header>
+
+  <section id="panels" aria-label="Two near-identical pictures, side by side">
+    <figure class="panel">
+      <figcaption>Picture A</figcaption>
+      <canvas id="panel-a" width="600" height="380"></canvas>
+    </figure>
+    <figure class="panel">
+      <figcaption>Picture B</figcaption>
+      <canvas id="panel-b" width="600" height="380"></canvas>
+    </figure>
+  </section>
+
+  <p id="message" role="status" aria-live="polite">Click a difference in either picture, or move the cursor with the arrow keys and press Enter.</p>
+
+  <div id="overlay" class="hidden">
+    <div id="overlay-card">
+      <h2 id="overlay-title">Spot the Difference</h2>
+      <p id="overlay-text"></p>
+      <p id="overlay-score"></p>
+      <button id="overlay-btn" type="button">Start playing</button>
+    </div>
+  </div>
+</main>
+<script type="module" src="./game.js"></script>
+</body>
+</html>
